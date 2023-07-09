@@ -2,13 +2,13 @@ FROM node:18.6.0-alpine as build
 
 WORKDIR /app/frontend
 COPY ./frontend/package.json ./
-COPY ./frontend/yarn.lock ./
+# COPY ./frontend/yarn.lock ./
 RUN yarn install --frozen-lockfile
 COPY ./frontend/src ./src
 COPY ./frontend/public ./public
 COPY ./frontend/tsconfig.json ./tsconfig.json
 
-RUN yarn build
+RUN npm run build
 
 # The second stage
 # Copy React static files and start nginx

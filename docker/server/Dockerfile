@@ -23,10 +23,6 @@ RUN pip install -r server/requirements.txt
 
 ADD ./backend/accounts /app/server/accounts
 ADD ./backend/backend /app/server/backend
-ADD ./backend/monitors /app/server/monitors
-ADD ./backend/alerts /app/server/alerts
-ADD ./backend/ml /app/server/ml
-ADD ./backend/pages /app/server/pages
 ADD ./backend/manage.py /app/server/
 ADD ./docker /app/docker
 
