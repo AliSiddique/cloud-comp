@@ -8,7 +8,7 @@ accounts_urlpatterns = [
     path('sentry-debug/', trigger_error),
     path("api/auth/", include("dj_rest_auth.urls")),
     path("api/auth/register/", include("dj_rest_auth.registration.urls")),
-       re_path(
+    re_path(
         r"^verify-email/(?P<key>[-:\w]+)/$",
         TemplateView.as_view(),
         name="account_confirm_email",
