@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     "dj_rest_auth",
     "dj_rest_auth.registration",
     "corsheaders",
+    'allauth.socialaccount.providers.google',
+
 
     # my apps
     "accounts",
@@ -171,3 +173,5 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8081","http:/
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
