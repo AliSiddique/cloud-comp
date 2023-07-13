@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-lvdat6w^@07ut!3xv(@ec@$n9mhl6hpiij*3@sy&b(vd38g4u5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -177,3 +177,7 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8081","http:/
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
