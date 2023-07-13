@@ -34,15 +34,6 @@ export default function Example() {
     <div className=" h-screen">
                   <h3>Hello {user.username} 👋</h3>
 
-                  <li className="nav-item">
-        <a
-            href="/app"
-            className="nav-link active"
-            onClick={() => dispatch(logout())}
-        >
-            Logout
-        </a>
-    </li>
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
@@ -139,6 +130,14 @@ export default function Example() {
       </div>
       <button onClick={handleClick}>Pay</button>
 
+      <li className="nav-item">
+        <button
+            className="nav-link active"
+            onClick={() => dispatch(logout())}
+        >
+            Logout
+        </button>
+    </li>
     </div>
     
   )

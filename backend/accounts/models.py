@@ -10,6 +10,9 @@ class UserProfile(models.Model):
     plan = models.CharField(max_length=200, default="free", blank=True)
     subscription_id = models.CharField(max_length=200, blank=True)
 
+    def __str__(self):
+        return self.user.username
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
