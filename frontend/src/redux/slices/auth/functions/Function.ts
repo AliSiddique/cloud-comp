@@ -9,7 +9,7 @@ export const registerUser =
     (username: string, email: string, password1: string, password2: string) =>
         async (dispatch: TypedDispatch) => {
             try {
-                const url = 'http://127.0.0.1:8000/api/auth/register/';
+                const url = `${process.env.BACKEND_URL}/api/auth/register/`;
                 await axios.post(url, { username, email, password1, password2 });
             } catch (error) {
                 console.log(error);
@@ -26,7 +26,7 @@ export const verifyEmail =
                 dispatch(setVerifyEmailStatus("started"));
 
                 // send POST request
-                const url = "http://127.0.0.1:8000/api/auth/register/verify-email/";
+                const url = `${process.env.BACKEND_URL}/api/auth/register/verify-email/`;
                 await axios.post(url, { key });
 
                 // set verify email status to ok
@@ -44,7 +44,7 @@ export const loginUser =
         async (dispatch: TypedDispatch) => {
             try {
 
-                const url = 'http://127.0.0.1:8000/api/auth/login/';
+                const url = `${process.env.BACKEND_URL}/api/auth/login/`;
                 const { data } = await axios.post(url, { email, password });
 
                 dispatch(setToken(data.key));
