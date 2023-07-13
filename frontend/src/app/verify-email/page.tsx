@@ -1,4 +1,3 @@
-import HomePage from '@/components/public/Pages/Home/HomePage'
 import React from 'react'
 
 type Props = {}
@@ -6,7 +5,7 @@ type Props = {}
 export default function page({}: Props) {
   return (
     <div>
-      <HomePage />
+        <h1>Verify Email</h1>
     </div>
   )
 }
