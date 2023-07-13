@@ -9,7 +9,7 @@ export const registerUser =
     (username: string, email: string, password1: string, password2: string) =>
         async (dispatch: TypedDispatch) => {
             try {
-                const url = `${process.env.BACKEND_URL}/api/auth/register/`;
+                const url = `https://next-django-saas-template-production.up.railway.app/api/auth/register/`;
                 await axios.post(url, { username, email, password1, password2 });
             } catch (error) {
                 console.log(error);
