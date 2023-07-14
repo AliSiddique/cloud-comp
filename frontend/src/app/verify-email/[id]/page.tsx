@@ -1,7 +1,8 @@
 "use client"
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getVerifyEmailStatus, verifyEmail } from "../../../redux/slices/auth/authSlice";
+import { verifyEmail } from "../../../redux/slices/auth/functions/Function";
+import { getVerifyEmailStatus } from "../../../redux/slices/auth/authSlice";
 import { useAppDispatch } from "../../../redux/store";
 import { redirect } from "next/navigation";
  interface VerifyEmailViewProps {

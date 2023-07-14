@@ -1,46 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import Card  from './Button';
 
-import { Button } from './Button';
-
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const meta: Meta<typeof Button> = {
-  title: 'Example/Button',
-  component: Button,
+const meta: Meta<typeof Card> = {
+  title: 'Card',
+  component: Card,
+  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: {
-      control: 'color',
-    },
+  parameters: {
+    // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
+    
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof Card>;
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Primary: Story = {
   args: {
-    primary: true,
-    label: 'Button',
+    title:"hello",
+    background:"red-500",
   },
 };
+
+
 
 export const Secondary: Story = {
   args: {
-    label: 'Button',
+    title:"hello",
+    background:"red-500",
+    showSub:true
   },
 };
 
-export const Large: Story = {
-  args: {
-    size: 'large',
-    label: 'Button',
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: 'small',
-    label: 'Button',
-  },
-};

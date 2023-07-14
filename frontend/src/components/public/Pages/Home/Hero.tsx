@@ -1,11 +1,13 @@
-
+import Image from "next/image";
+import Link from "next/link";
 
 export default function HomeHero() {
   return (
     <div className=" h-screen">
-
       <div className="relative isolate overflow-hidden pt-14">
-        <img
+        <Image
+        width={1674}
+        height={678}
           src="https://images.unsplash.com/photo-1583373834259-46cc92173cb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80"
           alt=""
           className="absolute inset-0 -z-10 h-full w-full object-cover"
@@ -33,15 +35,15 @@ export default function HomeHero() {
               fugiat veniam occaecat fugiat aliqua.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
+              <Link
                 href="#"
                 className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
               >
                 Get started
-              </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-white">
+              </Link>
+              <Link href="#" className="text-sm font-semibold leading-6 text-white">
                 Learn more <span aria-hidden="true">→</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

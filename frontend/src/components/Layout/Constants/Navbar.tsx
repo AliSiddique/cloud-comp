@@ -3,6 +3,8 @@ import React from 'react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import { useAppDispatch } from '@/redux/store';
 import { logout } from '@/redux/slices/auth/functions/Function';
+import Link from 'next/link';
+import Image from 'next/image';
 
 
 const navigation = [
@@ -26,7 +28,9 @@ export default async function Navbar({userLoggedIn}: User) {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
+              <Image
+              width={48}
+              height={48}
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                 alt=""
@@ -44,9 +48,9 @@ export default async function Navbar({userLoggedIn}: User) {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-white">
+              <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-white">
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
    

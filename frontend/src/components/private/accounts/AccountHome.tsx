@@ -2,6 +2,8 @@
 import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Switch, Transition } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { changePassword } from "../../../redux/slices/auth/functions/Function";
+import { useAppDispatch } from "../../../redux/store";
 import {
   Bars3Icon,
   BellIcon,
@@ -45,6 +47,12 @@ function classNames(...classes: string[]) {
 }
 
 export default function AccountPage() {
+
+  const dispatch = useAppDispatch();
+  const [oldPassword, setOldPassword] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+
   const [availableToHire, setAvailableToHire] = useState(true)
   const [privateAccount, setPrivateAccount] = useState(false)
   const [allowCommenting, setAllowCommenting] = useState(true)
@@ -568,6 +576,52 @@ export default function AccountPage() {
           </div>
         </div>
       </main>
+      <div>
+      <h3>Change Password</h3>
+      <div className="my-2">
+        <input
+          type="password"
+          className="form-control form-control-lg"
+          id="oldPassword"
+          placeholder="Old Password"
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
+        />
+      </div>
+
+      <div className="my-2">
+        <input
+          type="password"
+          className="form-control form-control-lg"
+          id="password1"
+          placeholder="New Password"
+          value={password1}
+          onChange={(e) => setPassword1(e.target.value)}
+        />
+      </div>
+      <div className="my-2">
+        <input
+          type="password"
+          className="form-control form-control-lg"
+          id="password2"
+          placeholder="Repeat New Password"
+          value={password2}
+          onChange={(e) => setPassword2(e.target.value)}
+        />
+      </div>
+
+      <button
+        className="btn btn-primary"
+        onClick={(e) => {
+          dispatch(changePassword(oldPassword, password1, password2));
+        }}
+        disabled={
+          oldPassword === "" || password1 === "" || password1 !== password2
+        }
+      >
+        Change Password
+      </button>
+    </div>
     </div>
   )
 }

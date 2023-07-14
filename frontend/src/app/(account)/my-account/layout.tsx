@@ -18,16 +18,18 @@ export default async function RootLayout({
 }) {
     const token = cookies().get('token')
     if (!token) return redirect('/user/login')
-    const result = await axios.get(`${process.env.BACKEND_URL}/api/auth/user/`,{
+    const result = await axios.get(`http://127.0.0.1:8000/api/auth/user/`,{
         headers: {
             'Authorization': `Token ${token.value}`
         }
     })
-    if (result) return redirect('/user/login')
+    if (!result) return redirect('/user/login')
 
   return (
+    <>
+            {children}
 
-        {children}
+    </>
 
   )
 }

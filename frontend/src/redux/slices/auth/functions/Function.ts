@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { TypedDispatch } from '../../../store';
 import { setToken, setUserInfo, setVerifyEmailStatus } from '../authSlice';
 import { UserType } from '../authSlice';
+import { useQuery, QueryKey } from '@tanstack/react-query';
 
 
 
@@ -9,7 +10,7 @@ export const registerUser =
     (username: string, email: string, password1: string, password2: string) =>
         async (dispatch: TypedDispatch) => {
             try {
-                const url = `https://next-django-saas-template-production.up.railway.app/api/auth/register/`;
+                const url = `http://127.0.0.1:8000/api/auth/register/`;
                 await axios.post(url, { username, email, password1, password2 });
             } catch (error) {
                 console.log(error);
@@ -44,7 +45,7 @@ export const loginUser =
         async (dispatch: TypedDispatch) => {
             try {
 
-                const url = `${process.env.BACKEND_URL}/api/auth/login/`;
+                const url = `http://127.0.0.1:8000/api/auth/login/`;
                 const { data } = await axios.post(url, { email, password });
 
                 dispatch(setToken(data.key));
@@ -76,7 +77,20 @@ export const loginUser =
                     console.error("Error occurred when fetching user information");
                 }
     };
-    
+    // const fetchUserInfo = async () => {
+    //     const url = 'http://127.0.0.1:8000/api/auth/user/';
+    //     const { data } = await axios.get(url);
+    //     return data;
+    //   };
+      
+
+    //   export const useFetchUserInfo = () => {
+    //     const queryKey: QueryKey = ['userInfo'];
+    //     return useQuery<any, Error>(queryKey, fetchUserInfo);
+    //   };
+
+
+
 
     export const resetPassword =
     (email: string) =>
@@ -100,7 +114,7 @@ export const setNewPassword =
         async (dispatch: TypedDispatch) => {
             try {
 
-                const url = 'http://127.0.0.1:8000/xapi/auth/password/reset/confirm/';
+                const url = 'http://127.0.0.1:8000/api/auth/password/reset/confirm/';
                 const data = {
                     uid,
                     token,
