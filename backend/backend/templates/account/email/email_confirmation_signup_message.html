@@ -1,0 +1,67 @@
+{% load account %}
+{% user_display user as user_display %}
+{% load i18n %}
+{% autoescape off %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+        }
+
+        p {
+            margin: 0 0 10px;
+        }
+
+        a {
+            color: #0088cc;
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0088cc;
+            color: #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #006699;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{% blocktrans with site_name=current_site.name %}Hello from {{ site_name }}!{% endblocktrans %}</h1>
+        
+        <p>{% blocktrans with user_display=user_display site_domain=current_site.domain %}You're receiving this email because user {{ user_display }} has given your email address to register an account on {{ site_domain }}.{% endblocktrans %}</p>
+        
+        <p>{% blocktrans with key=key %}To confirm this is correct, <a href="http://localhost:8081/auth/account/confirm/email/{{ key }}" target="_blank" class="btn">Click here.</a>{% endblocktrans %}</p>
+        
+        <p>{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you from {{ site_name }}! {{ site_domain }}{% endblocktrans %}</p>
+    </div>
+</body>
+</html>
+
+{% endautoescape %}

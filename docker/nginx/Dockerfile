@@ -2,10 +2,11 @@ FROM node:18.6.0-alpine as build
 
 WORKDIR /app/frontend
 COPY ./frontend/package.json ./
-# COPY ./frontend/yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN npm install 
 COPY ./frontend/src ./src
 COPY ./frontend/public ./public
+COPY ./frontend/tailwind.config.js ./tailwind.config.js
+COPY ./frontend/postcss.config.js ./postcss.config.js
 COPY ./frontend/tsconfig.json ./tsconfig.json
 
 RUN npm run build

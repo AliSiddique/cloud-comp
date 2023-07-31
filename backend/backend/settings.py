@@ -4,21 +4,21 @@ import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-sentry_sdk.init(
-    dsn="https://fe90c876ad7e497ebba01b691c2b3515@o4505501212278784.ingest.sentry.io/4505501213392896",
-    integrations=[
-        DjangoIntegration(),
-    ],
+# sentry_sdk.init(
+#     dsn="https://fe90c876ad7e497ebba01b691c2b3515@o4505501212278784.ingest.sentry.io/4505501213392896",
+#     integrations=[
+#         DjangoIntegration(),
+#     ],
 
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
-    traces_sample_rate=1.0,
+#     # Set traces_sample_rate to 1.0 to capture 100%
+#     # of transactions for performance monitoring.
+#     # We recommend adjusting this value in production.
+#     traces_sample_rate=1.0,
 
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)
+#     # If you wish to associate users to errors (assuming you are using
+#     # django.contrib.auth) you may enable sending PII data.
+#     send_default_pii=True
+# )
 env = environ.Env(
     # set casting, default value
 )
@@ -32,7 +32,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lvdat6w^@07ut!3xv(@ec@$n9mhl6hpiij*3@sy&b(vd38g4u5'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
@@ -60,10 +60,11 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "corsheaders",
     'allauth.socialaccount.providers.google',
-
-
+    "storages",
     # my apps
     "accounts",
+    "blog",
+    "payment",
 ]
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -102,7 +103,7 @@ REST_AUTH_SERIALIZERS = {
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'backend/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,12 +124,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'HOST':'containers-us-west-143.railway.app',
-        'PORT':'5434',
-        'USER':'postgres',
-        'PASSWORD':'vQ1TBQCT1zc50oAYtnYy',
+        'ENGINE': env('DB_ENGINE'),
+        'NAME': env('DB_DATABASE_NAME'),
+        'HOST':env('DB_HOST'),
+        'PORT':env('DB_PORT'),
+        'USER':env('DB_USER'),
+        'PASSWORD':env('DB_PASSWORD'),
     }
 }
 
@@ -177,11 +178,49 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8081","http://127.0.0.1:3000","http://127.0.0.1:8081",'https://next-django-saas-template.vercel.app','https://next-django-saas-template-production.up.railway.app']
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# if env("EMAIL_BACKEND", "console") != "console":
+#     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+# STRIPE SETTINGS
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
-
+STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
+
+# SEND EMAIL SETTINGS
+SENDGRID_API_KEY = env('SENDGRID_API_KEY')
+
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+
+
+# AWS SETTINGS
+DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE')
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME= env('AWS_STORAGE_BUCKET_NAME')
+AWS_QUERYSTRING_AUTH = env('AWS_QUERYSTRING_AUTH')
+
+
+
+# MEDIA FILES
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
+
+
+# DJANGO ADMIN SETTINGS
+DJANGO_SUPERUSER_USERNAME="alisiddique"
+DJANGO_SUPERUSER_PASSWORD="16doomsday"
+DJANGO_SUPERUSER_EMAIL="adidno@gmail.com"
+#python manage.py createsuperuser --noinput
+
+# DJANGO STATIC FILES SETTINGS
+STATIC_URL = "/django_static/"
+STATIC_ROOT = BASE_DIR / "django_static"
