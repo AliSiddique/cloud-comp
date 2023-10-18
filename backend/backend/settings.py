@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "corsheaders",
     'allauth.socialaccount.providers.google',
-    "storages",
     # my apps
     "accounts",
     "blog",
@@ -122,14 +121,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': env('DB_ENGINE'),
+#         'NAME': env('DB_DATABASE_NAME'),
+#         'HOST':env('DB_HOST'),
+#         'PORT':env('DB_PORT'),
+#         'USER':env('DB_USER'),
+#         'PASSWORD':env('DB_PASSWORD'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': env('DB_ENGINE'),
-        'NAME': env('DB_DATABASE_NAME'),
-        'HOST':env('DB_HOST'),
-        'PORT':env('DB_PORT'),
-        'USER':env('DB_USER'),
-        'PASSWORD':env('DB_PASSWORD'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'HOST':env('DB_HOST'),
+        # 'PORT':env('DB_PORT'),
+        # 'USER':env('DB_USER'),
+        # 'PASSWORD':env('DB_PASSWORD'),
     }
 }
 
@@ -183,28 +193,28 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 #     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 # STRIPE SETTINGS
-STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
-STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
+STRIPE_SECRET_KEY = "as"
+# STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
 
 # SEND EMAIL SETTINGS
-SENDGRID_API_KEY = env('SENDGRID_API_KEY')
+# SENDGRID_API_KEY = env('SENDGRID_API_KEY')
 
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
-EMAIL_PORT = env('EMAIL_PORT')
-EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+# EMAIL_HOST = env('EMAIL_HOST')
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
+# EMAIL_PORT = env('EMAIL_PORT')
+# EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 
 # AWS SETTINGS
-DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE')
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME= env('AWS_STORAGE_BUCKET_NAME')
-AWS_QUERYSTRING_AUTH = env('AWS_QUERYSTRING_AUTH')
+# DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE')
+# AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME= env('AWS_STORAGE_BUCKET_NAME')
+# AWS_QUERYSTRING_AUTH = env('AWS_QUERYSTRING_AUTH')
 
 
 
@@ -216,9 +226,7 @@ MEDIA_URL = '/media/'
 
 
 # DJANGO ADMIN SETTINGS
-DJANGO_SUPERUSER_USERNAME="alisiddique"
-DJANGO_SUPERUSER_PASSWORD="16doomsday"
-DJANGO_SUPERUSER_EMAIL="adidno@gmail.com"
+
 #python manage.py createsuperuser --noinput
 
 # DJANGO STATIC FILES SETTINGS
