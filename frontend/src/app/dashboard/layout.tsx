@@ -1,6 +1,7 @@
 import RootRedux from '@/redux/layout'
-import './globals.css'
+import '../globals.css'
 import { Inter } from 'next/font/google'
+import DashboardLayout from '@/components/Layout/Dashboard/DashboardLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -117,12 +118,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className + " bg-white"}>
-        <RootRedux>
+    <DashboardLayout>
         {children}
-        </RootRedux>
-        </body>
-    </html>
+    </DashboardLayout>
+       
   )
 }
