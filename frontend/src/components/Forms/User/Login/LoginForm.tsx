@@ -49,8 +49,8 @@ export default function LoginForm() {
                 <Image
                 width={48}
                 height={48}
-                  className="h-10 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  className="h-10 w-auto rounded-full"
+                  src="/cloud-comp-cw.png"
                   alt="Your Company"
                 />
                 <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -58,8 +58,8 @@ export default function LoginForm() {
                 </h2>
                 <p className="mt-2 text-sm leading-6 text-gray-500">
                   Not a member?{' '}
-                  <Link href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Start a 14 day free trial
+                  <Link href="/user/signup" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    Sign up here
                   </Link>
                 </p>
               </div>
@@ -79,7 +79,7 @@ export default function LoginForm() {
                           autoComplete="email"
                           {...register("email")}
                           required
-                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full text-gray-900 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -97,7 +97,7 @@ export default function LoginForm() {
                         autoComplete="current-password"
                         {...register("password")}
                         required
-                        className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block w-full text-gray-900 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
                         <button
                         type="button"
