@@ -3,19 +3,34 @@ import { TypedDispatch } from '../../../store';
 import { setToken, setUserInfo, setVerifyEmailStatus } from '../authSlice';
 import { UserType } from '../authSlice';
 import { useQuery, QueryKey } from '@tanstack/react-query';
+import { BASEURL } from '@/API/APIRoute';
+import { toast } from 'react-hot-toast';
 
 
 
 export const registerUser =
-    (username: string, email: string, password1: string, password2: string) =>
-        async (dispatch: TypedDispatch) => {
-            try {
-                const url = `http://127.0.0.1:8000/api/auth/register/`;
-                await axios.post(url, { username, email, password1, password2 });
-            } catch (error) {
-                console.log(error);
-            }
-};
+    (
+        username: string,
+        email: string,
+        password1: string,
+        password2: string,
+        toast: any,
+        router: any
+    ) =>
+    async (dispatch: TypedDispatch) => {
+        const toastId = toast.loading("Signing Up...")
+
+        try {
+            const url = `${BASEURL}/api/auth/register/`
+            await axios.post(url, { username, email, password1, password2 })
+            toast.success("Registered successfully", {
+                id: toastId,
+            })
+            router.push("/user/login")
+        } catch (error) {
+            toast.error("Registration Failed")
+        }
+    }
 
 
 
@@ -39,23 +54,26 @@ export const verifyEmail =
 };
 
 
-
 export const loginUser =
-    (email: string, password: string) =>
-        async (dispatch: TypedDispatch) => {
-            try {
+    (email: string, password: string, toast: any, router: any) =>
+    async (dispatch: TypedDispatch) => {
+        const toastId = toast.loading("Signing Up...")
 
-                const url = `http://127.0.0.1:8000/api/auth/login/`;
-                const { data } = await axios.post(url, { email, password });
+        try {
+            const url = `${BASEURL}/api/auth/login/`
+            const { data } = await axios.post(url, { email, password })
 
-                dispatch(setToken(data.key));
-                
-                // redirect ...
+            dispatch(setToken(data.key))
+            toast.success("Logged In successfully", {
+                id: toastId,
+            })
+            router.push("/dashboard")
+            // redirect ...
+        } catch (error) {
+            toast.error("Invalid Credentials")
+        }
+    }
 
-            } catch (error) {
-                console.error("Problem during login. Please try again.");
-            }
-        };
 
 
 

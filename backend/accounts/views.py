@@ -3,6 +3,12 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import RedirectView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from photo.serializers import PhotoSerializer
+from photo.models import Photo
+from rest_framework import generics
+from django.contrib.auth.models import User
 
 class GoogleLoginView(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
@@ -32,3 +38,13 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 # http://localhost:8081/?state=state_parameter_passthrough_value&code=4%2F0AZEOvhUTG_mqh-Zm7a1IFC5Td5CoHjGozgZ97wydnyjTu6xSJ_zVh_R2_vi4Jo9t8Svw3w&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=consent
+
+
+
+
+@api_view(['GET'])
+def get_users_photos(request):
+    user = User.objects.get(username=request.user)
+    photos = Photo.objects.filter(user=user)
+    serializer = PhotoSerializer(photos, many=True)
+    return Response(serializer.data)

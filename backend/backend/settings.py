@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "accounts",
     "blog",
     "payment",
+    "photo"
 ]
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -121,10 +122,21 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': "django.db.backends.postgresql",
+        'NAME': "cloud_comp_cw",
+        'HOST':"cloud-comp-cw.cnc25gpmhzgy.eu-west-2.rds.amazonaws.com",
+        'PORT':5432,
+        'USER':"postgres",
+        'PASSWORD':"cloud-comp-cw",
+    }
+}
+
 # DATABASES = {
 #     'default': {
-#         'ENGINE': env('DB_ENGINE'),
-#         'NAME': env('DB_DATABASE_NAME'),
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #         'HOST':env('DB_HOST'),
 #         'PORT':env('DB_PORT'),
 #         'USER':env('DB_USER'),
@@ -132,18 +144,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'HOST':env('DB_HOST'),
-        # 'PORT':env('DB_PORT'),
-        # 'USER':env('DB_USER'),
-        # 'PASSWORD':env('DB_PASSWORD'),
-    }
-}
-
-
+#hello by ali saddique (friend)
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -210,11 +211,13 @@ STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
 
 
 # AWS SETTINGS
-# DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE')
-# AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME= env('AWS_STORAGE_BUCKET_NAME')
-# AWS_QUERYSTRING_AUTH = env('AWS_QUERYSTRING_AUTH')
+DEFAULT_FILE_STORAGE="storages.backends.s3boto3.S3Boto3Storage"
+AWS_ACCESS_KEY_ID="AKIAQLLKFPRG24EE32WD"
+AWS_SECRET_ACCESS_KEY="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"
+AWS_STORAGE_BUCKET_NAME="cloud-comp-cw"
+AWS_S3_REGION_NAME="eu-west-2"
+AWS_S3_FILE_OVERWRITE=False
+AWS_QUERYSTRING_AUTH=False
 
 
 

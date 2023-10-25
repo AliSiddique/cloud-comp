@@ -9,6 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { redirect } from "next/navigation";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
+import {toast} from "react-hot-toast";
 type FormData = {
   username: string
   email: string
@@ -28,6 +30,8 @@ const schema = yup
 export default function SignupForm() {
     const [loading, setLoading] = React.useState(false);
     const [showPassword, setShowPassword] = React.useState(false);
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
@@ -40,7 +44,7 @@ export default function SignupForm() {
   const onSubmit = handleSubmit((data:FormData) => {
     setLoading(true);
     const { username, email, password, password2 } = data;
-    dispatch(registerUser(username, email, password, password2)); // dispatch register function
+    dispatch(registerUser(username, email, password, password2,toast,router)); // dispatch register function
     setLoading(false);
   })
 

@@ -2,6 +2,7 @@ from django.conf.urls import include
 from django.urls import path,re_path
 from django.views.generic import TemplateView
 from .views import GoogleLoginView, UserRedirectView
+from .views import get_users_photos
 
 def trigger_error(request):
     division_by_zero = 1 / 0
@@ -22,7 +23,8 @@ accounts_urlpatterns = [
         name="password_reset_confirm",
     ),
     path("dj-rest-auth/google/login/", GoogleLoginView.as_view(), name="google_login"),
-    path("~redirect/", view=UserRedirectView.as_view(), name="redirect")
+    path("~redirect/", view=UserRedirectView.as_view(), name="redirect"),
+    path("api/users-photos/", get_users_photos, name="users_photos")
 
 
 

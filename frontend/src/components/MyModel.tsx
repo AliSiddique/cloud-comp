@@ -1,8 +1,14 @@
 "use client"
+import { BASEURL } from '@/API/APIRoute'
 import { Dialog, Transition } from '@headlessui/react'
+import axios from 'axios'
 import { Fragment, useState } from 'react'
+import ClipLoader from 'react-spinners/ClipLoader'
 
-export default function MyModal({isOpen,setIsOpen}:any) {
+export default function MyModal({isOpen,setIsOpen,token}:any) {
+  const [image, setImage] = useState<any>()
+  const [loading, setLoading] = useState(false)
+  console.log("token",token)
 
   function closeModal() {
     setIsOpen(false)
@@ -11,27 +17,40 @@ export default function MyModal({isOpen,setIsOpen}:any) {
   function openModal() {
     setIsOpen(true)
   }
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
-    console.log("submitted");
+    setLoading(true)
     const formData = new FormData();
-    formData.append("file", e.target.files[0]);
+    formData.append("image", image[0]);
 
-    var requestOptions: any = {
-        method: "POST",
-        body: formData,
-        redirect: "follow",
-        "Content-type": "multipart/form-data",
-        headers: {
-            Authorization: `Token ${"0b1f958bb7d84bdb82384e50454f63e7a4a7eb06"}`,
-        },
-    }
+    if (token) {
+      console.log(token)
 
-    // Now you can proceed with the fetch request using requestOptions
-    fetch(`http://127.0.0.1:8000/api/add-photo`, requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error))
+      var requestOptions: any = {
+          method: "POST",
+          body: formData,
+          redirect: "follow",
+          "Content-type": "multipart/form-data",
+          headers: {
+              Authorization: `Token ${token}`,
+          },
+      }
+
+      // Now you can proceed with the fetch request using requestOptions
+      await fetch(`${BASEURL}/api/photo`, requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error))
+
+          // await axios.post(`${BASEURL}/api/photo`, formData, {
+          //   headers: {
+          //     Authorization: `Token ${'8d80be328d57c5cae80e5b6c0119c51fd4d8d534'}`,
+          //   },
+          // })
+  } else {
+      console.log("Token is undefined. Cannot make the fetch request.")
+  }
+    setLoading(false)
   }
   return (
     <>
@@ -78,7 +97,12 @@ export default function MyModal({isOpen,setIsOpen}:any) {
                     Drop your files here
                   </Dialog.Title>
                   <div className="mt-2">
-                   <Empty />
+                   {/* <Empty /> */}
+                   <input
+                    type="file"
+                    className='text-sm font-medium text-gray-900'
+                    onChange={(e: any) => setImage(e.target.files)}
+                />
                   </div>
 
                   <div className="mt-4 flex justify-between">
@@ -94,7 +118,7 @@ export default function MyModal({isOpen,setIsOpen}:any) {
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={handleSubmit}
                     >
-                      Save
+                      {loading ? <ClipLoader color="#ffffff" loading={loading} size={15} /> : "Upload"}
                     </button>
                   </div>
                 </Dialog.Panel>

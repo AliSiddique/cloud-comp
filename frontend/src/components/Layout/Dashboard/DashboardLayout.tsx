@@ -23,11 +23,7 @@ import MyModal from '@/components/MyModel'
 
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: false },
-  { name: 'All Files', href: '#', icon: Squares2X2IconOutline, current: false },
   { name: 'Photos', href: '#', icon: PhotoIcon, current: true },
-  { name: 'Shared', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Albums', href: '#', icon: RectangleStackIcon, current: false },
-  { name: 'Settings', href: '#', icon: CogIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Your profile', href: '#' },
@@ -71,7 +67,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function DashboardLayout({children}:any) {
+export default function DashboardLayout({token,children}:any) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [selected, setSelected] = useState(tabs.find((tab) => tab.current) || tabs[0])
@@ -334,7 +330,7 @@ export default function DashboardLayout({children}:any) {
                     </button>
                   </div>
                 </div>
-                  {isOpen && <MyModal isOpen={isOpen} setIsOpen={setIsOpen} />}
+                  {isOpen && <MyModal isOpen={isOpen} setIsOpen={setIsOpen} token={token} />}
                 {/* Tabs */}
                 <div className="mt-3 sm:mt-2">
                   <div className="sm:hidden">
