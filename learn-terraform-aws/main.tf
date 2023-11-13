@@ -13,8 +13,17 @@ resource "aws_instance" "web" {
 
   user_data = <<-EOF
               #!/bin/bash
-              # Install and configure Django and any other necessary software
-              # You can add your deployment script here
+              # Install and configure kubectl
+              sudo curl -o /usr/local/bin/kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2022-07-07/bin/linux/amd64/kubectl
+              sudo chmod +x /usr/local/bin/kubectl
+
+              # Configure kubeconfig
+              aws eks --region <AWS_REGION> update-kubeconfig --name <EKS_CLUSTER_NAME>
+
+              # Apply Kubernetes manifests
+              kubectl apply -f /path/to/frontend-deployment.yaml
+              kubectl apply -f /path/to/backend-deployment.yaml
+              kubectl apply -f /path/to/db-deployment.yaml
               EOF
 
   tags = {

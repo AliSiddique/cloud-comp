@@ -1,11 +1,73 @@
-apiVersion: 1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: backend
+  name: frontend-deployment
 spec:
-  containers:
-    - name: backend
-      image: backend:latest
-      ports:
-        - name: backend
-          containerPort: 8080
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: AliSiddique-cloud-comp-cw-frontend:latest
+        ports:
+        - containerPort: 3000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: AliSiddique-cloud-comp-cw-backend:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DEBUG
+          value: "True"
+        - name: DATABASE_URL
+          value: postgres://user:password@db:5432/db_name
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: db_name
+        - name: POSTGRES_USER
+          value: user
+        - name: POSTGRES_PASSWORD
+          value: password
