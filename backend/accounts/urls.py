@@ -24,7 +24,7 @@ accounts_urlpatterns = [
     ),
     path("dj-rest-auth/google/login/", GoogleLoginView.as_view(), name="google_login"),
     path("~redirect/", view=UserRedirectView.as_view(), name="redirect"),
-    path("api/users-photos/", get_users_photos, name="users_photos")
+    path("api/users-photos", get_users_photos, name="users_photos")
 
 
 
