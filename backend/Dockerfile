@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the current directory contents into the container at /app
 COPY . /app/
 
-# Expose the port that Django runs on
+# Expose the port that Django runs on  
 EXPOSE 8000
 
 # Define the command to run your application
