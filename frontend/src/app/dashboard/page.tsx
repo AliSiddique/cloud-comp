@@ -11,7 +11,7 @@ type Props = {}
 
   const getUsersPhotos = async () => {
     const token = cookies().get('token')
-   const res = await axios.get(`${BASEURL}/api/users-photos`, {
+   const res = await axios.get(`http://backend:8000/api/users-photos`, {
             headers: {
               Authorization: `Token ${token?.value}`,
             },
