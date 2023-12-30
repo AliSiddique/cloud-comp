@@ -2,9 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { TypedDispatch } from '../../../store';
 import { setToken, setUserInfo, setVerifyEmailStatus } from '../authSlice';
 import { UserType } from '../authSlice';
-import { useQuery, QueryKey } from '@tanstack/react-query';
 import { BASEURL } from '@/API/APIRoute';
-import { toast } from 'react-hot-toast';
 
 
 
@@ -27,8 +25,21 @@ export const registerUser =
                 id: toastId,
             })
             router.push("/user/login")
-        } catch (error) {
-            toast.error("Registration Failed")
+        } catch (error: any) {
+            console.log(error.response.data)
+            if (error.response.data.email)
+                toast.error(error.response.data.email, {
+                    id: toastId,
+                })
+            else if (error.response.data.username)
+                toast.error(error.response.data.username, {
+                    id: toastId,
+                })
+            else {
+                toast.error("Something went wrong", {
+                    id: toastId,
+                })
+            }
         }
     }
 
@@ -70,7 +81,9 @@ export const loginUser =
             router.push("/dashboard")
             // redirect ...
         } catch (error) {
-            toast.error("Invalid Credentials")
+            toast.error("Invalid credentials", {
+                id: toastId,
+            })
         }
     }
 

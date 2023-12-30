@@ -1,26 +1,11 @@
 from pathlib import Path
 import environ
 import os
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 
-# sentry_sdk.init(
-#     dsn="https://fe90c876ad7e497ebba01b691c2b3515@o4505501212278784.ingest.sentry.io/4505501213392896",
-#     integrations=[
-#         DjangoIntegration(),
-#     ],
 
-#     # Set traces_sample_rate to 1.0 to capture 100%
-#     # of transactions for performance monitoring.
-#     # We recommend adjusting this value in production.
-#     traces_sample_rate=1.0,
-
-#     # If you wish to associate users to errors (assuming you are using
-#     # django.contrib.auth) you may enable sending PII data.
-#     send_default_pii=True
-# )
 env = environ.Env(
     # set casting, default value
+    DEBUG=(bool, True)
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,7 +17,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = "django-insecure-lvdat6w^@07ut!3xv(@ec@$n9mhl6hpiij*3@sy&b(vd38g4u5"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
@@ -187,7 +172,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8081","http://127.0.0.1:3000","http://127.0.0.1:8081",'https://next-django-saas-template.vercel.app','https://next-django-saas-template-production.up.railway.app']
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8081","http://127.0.0.1:3000","http://127.0.0.1:8081",'https://next-django-saas-template.vercel.app','https://next-django-saas-template-production.up.railway.app','http://0.0.0.0:3000',]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # if env("EMAIL_BACKEND", "console") != "console":

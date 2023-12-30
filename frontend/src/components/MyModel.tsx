@@ -1,13 +1,14 @@
 "use client"
 import { BASEURL } from '@/API/APIRoute'
 import { Dialog, Transition } from '@headlessui/react'
-import axios from 'axios'
 import { Fragment, useState } from 'react'
 import ClipLoader from 'react-spinners/ClipLoader'
+import { useRouter } from 'next/navigation'
 
 export default function MyModal({isOpen,setIsOpen,token}:any) {
   const [image, setImage] = useState<any>()
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
   console.log("token",token)
 
   function closeModal() {
@@ -38,15 +39,18 @@ export default function MyModal({isOpen,setIsOpen,token}:any) {
 
       // Now you can proceed with the fetch request using requestOptions
       await fetch(`${BASEURL}/api/photo`, requestOptions)
-          .then((response) => response.text())
-          .then((result) => console.log(result))
+          .then((response) => {
+            response.text()
+          window.location.reload()
+          })
+          .then((result) => {
+            
+            console.log(result)
+            window.location.reload()
+
+          })
           .catch((error) => console.log("error", error))
 
-          // await axios.post(`${BASEURL}/api/photo`, formData, {
-          //   headers: {
-          //     Authorization: `Token ${'8d80be328d57c5cae80e5b6c0119c51fd4d8d534'}`,
-          //   },
-          // })
   } else {
       console.log("Token is undefined. Cannot make the fetch request.")
   }

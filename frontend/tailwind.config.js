@@ -9,6 +9,15 @@ module.exports = {
     transparent: "transparent",
     current: "currentColor",
     extend: {
+      animation: {
+        grid: "grid 15s linear infinite",
+      },
+      keyframes: {
+        grid: {
+          "0%": { transform: "translateY(-50%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+      },
       colors: {
         // light mode
         tremor: {

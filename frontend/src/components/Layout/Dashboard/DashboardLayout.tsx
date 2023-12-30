@@ -89,7 +89,7 @@ export default function DashboardLayout({token,children}:any) {
             <div className="flex flex-shrink-0 items-center">
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=white"
+                src="/cloud-comp-cw.png"
                 alt="Your Company"
               />
             </div>

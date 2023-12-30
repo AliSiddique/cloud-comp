@@ -1,18 +1,22 @@
-# Build Stage
-FROM node:16-alpine AS BUILD_IMAGE
-WORKDIR /app
+FROM node:current-alpine AS base
+WORKDIR /base
 COPY package*.json ./
 RUN npm install
 COPY . .
+
+FROM base AS build
+ENV NODE_ENV=production
+WORKDIR /build
+COPY --from=base /base ./
 RUN npm run build
 
-# Production Stage
-FROM node:16-alpine AS PRODUCTION_STAGE
-WORKDIR /app
-COPY --from=BUILD_IMAGE /app/package*.json ./
-COPY --from=BUILD_IMAGE /app/.next ./.next
-COPY --from=BUILD_IMAGE /app/public ./public
-COPY --from=BUILD_IMAGE /app/node_modules ./node_modules
+FROM node:current-alpine AS production
 ENV NODE_ENV=production
+WORKDIR /app
+COPY --from=build /build/package*.json ./
+COPY --from=build /build/.next ./.next
+COPY --from=build /build/public ./public
+RUN npm install next
+
 EXPOSE 3000
-CMD ["npm", "run","dev"]
+CMD npm run start
