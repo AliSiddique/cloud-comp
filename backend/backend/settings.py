@@ -129,6 +129,7 @@ DATABASES = {
 #     }
 # }
 
+
 #hello by ali saddique (friend)
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
