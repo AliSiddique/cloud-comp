@@ -23,7 +23,6 @@ import MyModal from '@/components/MyModel'
 
 const navigation = [
   { name: 'Home', href: '#', icon: HomeIcon, current: false },
-  { name: 'Photos', href: '#', icon: PhotoIcon, current: true },
 ]
 const userNavigation = [
   { name: 'Sign out', href: '#' },
@@ -281,7 +280,7 @@ export default function DashboardLayout({token,children}:any) {
                   <button
                     type="button"
                     onClick={() => setIsOpen(!isOpen)}
-                    className="relative rounded-full bg-indigo-600 p-1.5 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="relative animate-pulse rounded-full bg-indigo-600 p-1.5 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     <span className="absolute -inset-1.5" />
                     <PlusIcon className="h-5 w-5" aria-hidden="true" />
@@ -390,7 +389,7 @@ export default function DashboardLayout({token,children}:any) {
             </main>
 
             {/* Details sidebar */}
-            <aside className="hidden w-96 overflow-y-auto border-l border-gray-200 bg-white p-8 lg:block">
+            {/* <aside className="hidden w-96 overflow-y-auto border-l border-gray-200 bg-white p-8 lg:block">
               <div className="space-y-6 pb-16">
                 <div>
                   <div className="aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg">
@@ -457,7 +456,7 @@ export default function DashboardLayout({token,children}:any) {
                   </button>
                 </div>
               </div>
-            </aside>
+            </aside> */}
           </div>
         </div>
       </div>
