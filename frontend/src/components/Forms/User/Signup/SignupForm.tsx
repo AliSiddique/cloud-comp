@@ -248,23 +248,7 @@ export default function SignupForm() {
                                                 "Sign up"
                                             )}
                                         </button>
-                                        <small className="block text-center text-gray-500 mt-2">
-                                            By signing up, you agree to our{" "}
-                                            <Link
-                                                className="underline"
-                                                href="/legal/terms"
-                                            >
-                                                Terms of Service
-                                            </Link>{" "}
-                                            and{" "}
-                                            <Link
-                                                className="underline"
-                                                href="/legal/privacy"
-                                            >
-                                                Privacy Policy
-                                            </Link>
-                                            .
-                                        </small>
+                           
                                     </div>
                                 </form>
                             </div>

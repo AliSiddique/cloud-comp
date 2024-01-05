@@ -2,7 +2,7 @@ from pathlib import Path
 import environ
 import os
 
-
+# Deployed on AWS Elastic Beanstalk with the CLI
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True)

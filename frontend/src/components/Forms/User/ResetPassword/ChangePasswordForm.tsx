@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../../../redux/store";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+export const randUrl = "-3onr.onrender.com"
 
 type Props = {
     params: {
@@ -41,7 +42,6 @@ export default function ChangePasswordForm({params}:Props) {
         dispatch(setNewPassword(key, token, password1, password2)); // dispatch register function
       }
   const { key, token } = params
-
 
 
 
