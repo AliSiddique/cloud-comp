@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
 # Create your views here.
-stripe.api_key=settings.STRIPE_SECRET_KEY
+stripe.api_key="ad"
 
 class CreateSubscription(APIView):
     def post(self , request,*args, **kwargs):
