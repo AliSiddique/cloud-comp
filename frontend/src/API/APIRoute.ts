@@ -3,7 +3,7 @@ import { randUrl } from "@/components/Forms/User/ResetPassword/ChangePasswordFor
 export let BASEURL:string;
 let urlBACK = "backend-cloud"
 if(process.env.NODE_ENV === "production") {
-    BASEURL = `https://${urlBACK}${randUrl.toString()}`
+    BASEURL = `https://${urlBACK}-3onr.onrender.com`
 } else {
     BASEURL = "http://127.0.0.1:8000"
 }
