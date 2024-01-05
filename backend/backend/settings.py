@@ -73,7 +73,7 @@ ACCOUNT_EMAIL_VERIFICATION = "optional"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",  # <------- please add CORS headers middleware exactly here!
+    "corsheaders.middleware.CorsMiddleware", 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -104,9 +104,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# AWS RDS Postgres Database
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.postgresql",
@@ -118,16 +117,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#         'HOST':env('DB_HOST'),
-#         'PORT':env('DB_PORT'),
-#         'USER':env('DB_USER'),
-#         'PASSWORD':env('DB_PASSWORD'),
-#     }
-# }
 
 
 #hello by ali saddique (friend)
@@ -173,30 +162,20 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8081","http://127.0.0.1:3000","http://127.0.0.1:8081",'https://next-django-saas-template.vercel.app','https://next-django-saas-template-production.up.railway.app',"http://0.0.0.0:3000","https://cloud-computing-cw.vercel.app","https://main.d8a3ju6lrxtf0.amplifyapp.com"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8081","http://127.0.0.1:3000","http://127.0.0.1:8081",'https://next-django-saas-template.vercel.app','https://next-django-saas-template-production.up.railway.app',"http://0.0.0.0:3000","https://cloud-computing-cw.vercel.app","https://main.d8a3ju6lrxtf0.amplifyapp.com","cloud-computing-cw-django-backend-4084292849248242048.elasticbeanstalk.com"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# if env("EMAIL_BACKEND", "console") != "console":
-#     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-# STRIPE SETTINGS
-STRIPE_SECRET_KEY = "as"
-# STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
+
+
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
 
-# SEND EMAIL SETTINGS
-# SENDGRID_API_KEY = env('SENDGRID_API_KEY')
-
-# EMAIL_HOST = env('EMAIL_HOST')
-# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
-# EMAIL_PORT = env('EMAIL_PORT')
-# EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 
-# AWS SETTINGS
+
+# AWS S3 Bucket SETTINGS
 DEFAULT_FILE_STORAGE="storages.backends.s3boto3.S3Boto3Storage"
 AWS_ACCESS_KEY_ID="AKIAQLLKFPRG24EE32WD"
 AWS_SECRET_ACCESS_KEY="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"
@@ -212,11 +191,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-
-
-# DJANGO ADMIN SETTINGS
-
-#python manage.py createsuperuser --noinput
 
 # DJANGO STATIC FILES SETTINGS
 STATIC_URL = "/django_static/"
